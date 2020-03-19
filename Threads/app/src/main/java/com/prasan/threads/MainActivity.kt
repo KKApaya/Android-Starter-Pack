@@ -22,8 +22,9 @@ class MainActivity : AppCompatActivity() {
 
         binding.buttonStartThread.setOnClickListener {
             stopThread = false
-            val runnable = ThreadRunnableExample(10)
-            Thread(runnable).start()
+            ThreadExample(10).start()
+//            val runnable = ThreadRunnableExample(10)
+//            Thread(runnable).start()
         }
         binding.buttonStopThread.setOnClickListener {
             stopThread = true
@@ -39,7 +40,6 @@ class MainActivity : AppCompatActivity() {
                         override fun run() {
                             binding.buttonStartThread.text = "50%"
                         }
-
                     })
                 }
 //                  mainHandler.post(object : Runnable{
@@ -60,11 +60,7 @@ class MainActivity : AppCompatActivity() {
             for (i in 1..time!!){
                 if (stopThread) return
                 if(i==5){
-                    mainHandler.post(object : Runnable{
-                        override fun run(){
-                            binding.buttonStartThread.text = "50%"
-                        }
-                    })
+                    binding.buttonStartThread.text = "50%"
                 }
                 Log.d(TAG,"start Thread $i")
                 SystemClock.sleep(1000)
