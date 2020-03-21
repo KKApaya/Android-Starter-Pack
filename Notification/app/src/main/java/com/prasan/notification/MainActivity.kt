@@ -5,6 +5,7 @@ import android.content.Intent
 import android.graphics.BitmapFactory
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.EditText
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import com.prasan.notification.databinding.ActivityMainBinding
@@ -12,7 +13,8 @@ import com.prasan.notification.databinding.ActivityMainBinding
 class MainActivity : AppCompatActivity() {
     private lateinit var binding:ActivityMainBinding
     private lateinit var notificationManager:NotificationManagerCompat
-
+    private val titleStr : String by lazy { binding.editTitle.text.toString() }
+    private val msgStr:String by lazy {  binding.editMessage.text.toString() }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -26,8 +28,6 @@ class MainActivity : AppCompatActivity() {
 
 
         binding.buttonChannel1.setOnClickListener {
-            var titleStr = binding.editTitle.text.toString()
-            var msgStr = binding.editMessage.text.toString()
             broadcastIntent.putExtra("toastMessage",titleStr)
             var notification = NotificationCompat.Builder(this,App.channel.CHANNEL_1)
                 .setSmallIcon(R.drawable.ic_launcher_foreground)
